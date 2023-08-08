@@ -1,0 +1,16 @@
+// colors
+$primary-dark: 2 15 20;
+$secondary-dark: 5 32 43;
+$tertiary-dark: 17 37 45;
+
+$primary-bg: rgb($primary-dark);
+$secondary-bg: rgba(rgb($secondary-dark), 0.5);
+$tertiary-bg: rgba(rgb($tertiary-dark), 0.5);
+
+$primary-green: 36 179 88;
+
+$accent-text: rgb($primary-green);
+
+// other variables
+$primary-radius: 4px;
+$secondary-radius: 8px;
