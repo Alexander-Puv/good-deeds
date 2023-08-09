@@ -7,19 +7,24 @@
   padding: 40px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   background-color: $secondary-bg;
   border-radius: $secondary-radius;
-}
 
-.bottom {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .bottom {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-.switch {
-  color: $accent-text;
-  cursor: pointer;
+    .switch {
+      color: rgb(255 255 255 / 75%);
+      cursor: pointer;
+      transition: .2s ease;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
 }

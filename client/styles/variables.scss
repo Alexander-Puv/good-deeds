@@ -5,12 +5,13 @@ $tertiary-dark: 17 37 45;
 
 $primary-bg: rgb($primary-dark);
 $secondary-bg: rgba(rgb($secondary-dark), 0.5);
+$secondary-bg-hover: rgb($secondary-dark);
 $tertiary-bg: rgba(rgb($tertiary-dark), 0.5);
 
-$primary-green: 36 179 88;
-
-$accent-text: rgb($primary-green);
+$white-75: rgb(255 255 255 / 75%);
 
 // other variables
 $primary-radius: 4px;
 $secondary-radius: 8px;
+
+$short-transition: .2s;

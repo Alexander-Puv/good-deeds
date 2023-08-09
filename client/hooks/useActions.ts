@@ -1,5 +1,10 @@
-import { RootState } from '@/store';
-import { useSelector, TypedUseSelectorHook } from 'react-redux';
+import actionCreators from '@/store/action-creators';
+import { bindActionCreators } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 
-const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector
-export default useTypedSelector
+const useActions = () => {
+  const dispatch = useDispatch()
+  return bindActionCreators(actionCreators, dispatch)
+}
+
+export default useActions

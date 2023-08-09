@@ -1,18 +1,24 @@
+import userData from "./userData"
+
 export interface AuthState {
-  isAuth: boolean
+  userData: userData | null
   isLoading: boolean
-  username: string | undefined
 }
 
 export enum AuthActionTypes {
-  SET_ISAUTH = 'SET_ISAUTH',
-  SET_ISLOADING = 'SET_ISLOADING',
-  // SET_USERNAME = 'SET_USERNAME'
+  LOGIN = 'LOGIN',
+  SIGNUP = 'SIGNUP',
+  SET_ISLOADING = 'SET_ISLOADING'
 }
 
-interface SetIsAuthAction {
-  type: AuthActionTypes.SET_ISAUTH,
-  payload: Omit<AuthState, 'isLoading'>
+interface SetLoginAction {
+  type: AuthActionTypes.LOGIN
+  payload: userData | null
+}
+
+interface SetSignupAction {
+  type: AuthActionTypes.SIGNUP
+  payload: userData | null
 }
 
 interface SetIsLoadingAction {
@@ -20,9 +26,4 @@ interface SetIsLoadingAction {
   payload: boolean
 }
 
-// interface SetUsernameAction {
-//   type: AuthActionTypes.SET_USERNAME
-//   payload: string
-// }
-
-export type AuthAction = SetIsAuthAction | SetIsLoadingAction // | SetUsernameAction
+export type AuthAction = SetLoginAction | SetSignupAction | SetIsLoadingAction
