@@ -1,6 +1,6 @@
 'use client'
 
-import Popup from '@/components/UI/Popup';
+import TagPopup from '@/components/TagPopup';
 import useTypedSelector from '@/hooks/useTypedSelector';
 import cl from '@/styles/pages/main.module.scss';
 
@@ -9,9 +9,8 @@ export default function Page() {
 
   return (
     <main className={cl.main}>
-      {!userData?.tag &&
-        <Popup title='Do you want change' btns='OK' />}
-      {userData?.username}
+      <TagPopup />
+      <h1>{userData?.username}</h1>
     </main>
   )
 }

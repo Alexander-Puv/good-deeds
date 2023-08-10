@@ -1,0 +1,28 @@
+@import '@/styles/variables.scss';
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.button {
+  &.decline {
+    padding: 9px 39px;
+    color: $white-75;
+    background-color: transparent;
+    border: 1px solid $tertiary-bg;
+    transition: $short-transition ease;
+    &:hover {
+      color: white;
+      border-color: white;
+    }
+  }
+
+  &:disabled {
+    color: $white-25;
+    background-color: $tertiary-bg;
+    cursor: default;
+  }
+}
