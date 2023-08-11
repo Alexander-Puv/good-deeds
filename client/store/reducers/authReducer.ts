@@ -10,9 +10,13 @@ const initialState: AuthState = {
 const authReducer = (state = initialState, action: AuthAction): AuthState => {
   switch (action.type) {
     case AuthActionTypes.LOGIN:
+      // some logic to add new user
+      localStorage.setItem('user-data', JSON.stringify(action.payload))
       return {...state, userData: action.payload}
     
     case AuthActionTypes.SIGNUP:
+      // some logic to add new user
+      localStorage.setItem('user-data', JSON.stringify(action.payload))
       return {...state, userData: action.payload}
 
     case AuthActionTypes.SET_ISLOADING:

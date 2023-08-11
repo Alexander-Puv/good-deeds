@@ -3,7 +3,7 @@
 import Popup from '@/components/UI/Popup/Popup';
 import useTypedSelector from '@/hooks/useTypedSelector';
 import cl from '@/styles/components/TagPopup.module.scss';
-import userData from '@/types/userData';
+import userData from '@/types/auth';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 interface TagPopupProps {

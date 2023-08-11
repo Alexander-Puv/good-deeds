@@ -1,4 +1,11 @@
-import userData from "./userData"
+export default interface userData {
+  // id: string
+  email: string,
+  username: string,
+  tag?: string,
+}
+
+// reducer
 
 export interface AuthState {
   userData: userData | null
