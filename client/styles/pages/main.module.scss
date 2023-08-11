@@ -3,7 +3,44 @@
 .main {
   width: 100%;
   height: 100%;
-  // padding: 0 120px;
   display: flex;
   flex-direction: column;
+  gap: 80px;
+
+  .list {
+    padding: 0 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .item {
+      padding: 20px;
+      display: flex;
+      align-items: top;
+      gap: 20px;
+      background-color: $secondary-bg;
+
+      span {
+        flex: 0 0 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px white solid;
+        cursor: pointer;
+
+        &[aria-checked="false"] svg {
+          opacity: 0;
+        }
+        
+        &[aria-checked="false"]:hover svg {
+          opacity: .5;
+        }
+      }
+      
+      p {
+
+      }
+    }
+  }
 }
