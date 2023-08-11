@@ -1,17 +1,16 @@
 'use client'
 
 import Popup from '@/components/UI/Popup/Popup';
-import PopupButton, { PopupButtonContainer } from '@/components/UI/Popup/PopupButton';
 import useTypedSelector from '@/hooks/useTypedSelector';
 import cl from '@/styles/components/TagPopup.module.scss';
-import { useEffect, useState, ChangeEvent } from 'react';
+import userData from '@/types/userData';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 const TagPopup = () => {
   const {userData} = useTypedSelector(state => state.auth)
   const [popup, setPopup] = useState(false)
   const [tag, setTag] = useState('')
   const [errors, setErrors] = useState<string[]>([])
-  let typingTimer: NodeJS.Timeout
 
   useEffect(() => {
     !userData?.tag && setPopup(true)
@@ -40,19 +39,24 @@ const TagPopup = () => {
   }
 
   const handleTagChange = (e: ChangeEvent<HTMLInputElement>) => {
-    clearTimeout(typingTimer)
-    
     const newTag = e.currentTarget.value
     setTag(newTag)
+    validateTag(newTag)
+  }
 
-    typingTimer = setTimeout(() => {
-      validateTag(newTag)
-    }, 1000)
+  const acceptClickHandler = () => {
+    const userData: userData = JSON.parse(localStorage.getItem('user-data') as string)
+    localStorage.setItem('user-data', JSON.stringify({...userData, tag: `@${tag}`} as userData))
   }
 
   return (
-    <Popup title='Add tag to find friends!' open={{state: popup, setState: setPopup}}>
-      <span className='divider'></span>
+    <Popup title='Add tag to find friends!'
+      open={{state: popup, setState: setPopup}}
+      btns={{
+        declineBtn: {text: 'decline'},
+        acceptBtn: {active: !errors.length && !!tag, text: 'Submit', onClick: acceptClickHandler}
+      }}>
+      <span className='divider' />
       <div className={cl.tagInput}>
         <span>@</span>
         <input placeholder='Tag'
@@ -63,10 +67,7 @@ const TagPopup = () => {
           <div>{e}</div>
         )}
       </div> : ''}
-      <span className='divider'></span>
-      <PopupButtonContainer>e
-        <PopupButton active={!errors.length}>Submit</PopupButton>
-      </PopupButtonContainer>
+      <span className='divider' />
     </Popup>
   )
 }

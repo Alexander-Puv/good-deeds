@@ -31,7 +31,7 @@ const Popup = ({title, children, open, btns}: PopupProps) => {
           {typeof btns === 'string' ?
             <PopupButton text={btns} open={open}  />
           : <PopupButtonContainer>
-            <PopupButton {...{...btns.acceptBtn, open}} decline />
+            <PopupButton {...{...btns.declineBtn, open}} decline />
             <PopupButton {...{...btns.acceptBtn, open}} />
           </PopupButtonContainer>}
         </div>
