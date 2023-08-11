@@ -6,9 +6,13 @@ import cl from '@/styles/components/TagPopup.module.scss';
 import userData from '@/types/userData';
 import { ChangeEvent, useEffect, useState } from 'react';
 
-const TagPopup = () => {
+interface TagPopupProps {
+  popup: boolean,
+  setPopup: (prop: boolean) => void
+}
+
+const TagPopup = ({popup, setPopup}: TagPopupProps) => {
   const {userData} = useTypedSelector(state => state.auth)
-  const [popup, setPopup] = useState(false)
   const [tag, setTag] = useState('')
   const [errors, setErrors] = useState<string[]>([])
 

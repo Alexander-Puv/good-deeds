@@ -46,5 +46,10 @@
     .title {
       font-weight: 500;
     }
+
+    .btns {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 }
