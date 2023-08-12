@@ -1,5 +1,5 @@
 export default interface userData {
-  // id: string
+  // id: number
   email: string,
   username: string,
   tag?: string,

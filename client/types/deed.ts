@@ -1,5 +1,5 @@
 export default interface IDeed {
-  id: string
+  id: number
   checked: boolean,
   text: string,
 }
@@ -13,7 +13,7 @@ export enum DeedActionTypes {
 
 export interface ToggleDeedCheckedAction {
   type: DeedActionTypes.TOGGLE_DEED_CHECKED,
-  payload: string // id of a deed
+  payload: number // id of a deed
 }
 
 export interface SetDeedTextAction {

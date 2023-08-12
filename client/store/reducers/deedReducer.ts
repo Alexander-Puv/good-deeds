@@ -1,9 +1,9 @@
 import IDeed, { DeedAction, DeedActionTypes } from '@/types/deed';
 
 const initialState: IDeed[] = [
-  { id: '1', checked: false, text: 'Deed 1' },
-  { id: '2', checked: true, text: 'Deed 2' },
-  { id: '3', checked: false, text: 'Deed 3' },
+  { id: 1, checked: false, text: 'Deed 1' },
+  { id: 2, checked: true, text: 'Deed 2' },
+  { id: 3, checked: false, text: 'Deed 3' },
 ];
 
 const deedReducer = (state = initialState, action: DeedAction): IDeed[] => {
