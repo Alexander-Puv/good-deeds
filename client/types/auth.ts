@@ -1,4 +1,4 @@
-export default interface userData {
+export default interface IUser {
   // id: number
   // createdAt: Date,
   email: string,
@@ -9,7 +9,7 @@ export default interface userData {
 // reducer
 
 export interface AuthState {
-  userData: userData | null
+  user: IUser | null
   isLoading: boolean
 }
 
@@ -21,12 +21,12 @@ export enum AuthActionTypes {
 
 interface SetLoginAction {
   type: AuthActionTypes.LOGIN
-  payload: userData | null
+  payload: IUser | null
 }
 
 interface SetSignupAction {
   type: AuthActionTypes.SIGNUP
-  payload: userData | null
+  payload: IUser | null
 }
 
 interface SetIsLoadingAction {

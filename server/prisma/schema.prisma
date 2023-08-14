@@ -8,17 +8,25 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  email String
-  hash String
-  username String
-  tag String?
+  email     String   @unique
+  hash      String
+  username  String
+  tag       String?
+  deeds     Deed[]
+
+  @@map("users")
 }
 
 model Deed {
-  id Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  checked Boolean @default(false)
-  text: String
+  checked   Boolean  @default(false)
+  text      String
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  @@map("deeds")
 }

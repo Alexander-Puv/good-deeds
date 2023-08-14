@@ -3,7 +3,7 @@
 import Popup from '@/components/UI/Popup/Popup';
 import useTypedSelector from '@/hooks/useTypedSelector';
 import cl from '@/styles/components/TagPopup.module.scss';
-import userData from '@/types/auth';
+import IUser from '@/types/auth';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 interface TagPopupProps {
@@ -12,12 +12,12 @@ interface TagPopupProps {
 }
 
 const TagPopup = ({popup, setPopup}: TagPopupProps) => {
-  const {userData} = useTypedSelector(state => state.auth)
+  const {user} = useTypedSelector(state => state.auth)
   const [tag, setTag] = useState('')
   const [errors, setErrors] = useState<string[]>([])
 
   useEffect(() => {
-    !userData?.tag && setPopup(true)
+    !user?.tag && setPopup(true)
   }, [])
 
   const validateTag = (tag: string) => {
@@ -49,8 +49,8 @@ const TagPopup = ({popup, setPopup}: TagPopupProps) => {
   }
 
   const acceptClickHandler = () => {
-    const userData: userData = JSON.parse(localStorage.getItem('user-data') as string)
-    localStorage.setItem('user-data', JSON.stringify({...userData, tag: `@${tag}`} as userData))
+    const user: IUser = JSON.parse(localStorage.getItem('user-data') as string)
+    localStorage.setItem('user-data', JSON.stringify({...user, tag: `@${tag}`} as IUser))
   }
 
   return (
