@@ -11,8 +11,7 @@ export default interface IUser {
 
 export interface UserData {
   user: IUser,
-  accessToken: string,
-  refreshToken: string
+  token: string,
 }
 
 export interface UserCreationAttrs {
