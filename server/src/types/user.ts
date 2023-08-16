@@ -5,7 +5,7 @@ export default interface IUser {
   createdAt: Date,
   email: string,
   username: string,
-  tag?: string,
+  tag?: string | null,
   deeds?: IDeed[]
 }
 
