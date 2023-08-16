@@ -1,9 +1,21 @@
 import { Injectable, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import IUser from 'src/types/user';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
+
+  async getMe (user: IUser) {
+    return this.prisma.user.findUnique({
+      where: {
+        id: user.id
+      },
+      include: {
+        deeds: true
+      }
+    })
+  }
 
   async editTag(userId: number, tag: string) {
     const updatedTag = tag ? `@${tag}` : null
@@ -21,6 +33,9 @@ export class UserService {
       },
       data: {
         tag: updatedTag
+      },
+      include: {
+        deeds: true
       }
     })
   
@@ -32,6 +47,9 @@ export class UserService {
     const user = await this.prisma.user.findFirst({
       where: {
         tag: `@${tag}`
+      },
+      include: {
+        deeds: true
       }
     })
     if (!user) throw new ForbiddenException('User was not found')

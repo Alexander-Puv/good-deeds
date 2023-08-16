@@ -11,7 +11,8 @@ export class UserController {
 
   @Get('me')
   getMe(@GetUser() user: IUser) {
-    return user
+    console.log(user)
+    return this.usersService.getMe(user)
   }
 
   @Put('me')
