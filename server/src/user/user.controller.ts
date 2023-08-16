@@ -15,12 +15,12 @@ export class UserController {
   }
 
   @Put('me')
-  editMe(@GetUser('id') userId: number, @Body() {tag}: {tag: string}) {
-    return this.usersService.editMe(userId, tag)
+  editTag(@GetUser('id') userId: number, @Body() {tag}: {tag: string}) {
+    return this.usersService.editTag(userId, tag)
   }
 
-  @Get(':username')
-  getUserByName(@Param('username') username: string) {
-    return this.usersService.getUserByName(username)
+  @Get(':tag')
+  getUserByTag(@Param('tag') tag: string) {
+    return this.usersService.getUserByTag(tag)
   }
 }

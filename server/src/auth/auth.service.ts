@@ -5,7 +5,6 @@ import * as argon from 'argon2'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { UserData } from 'src/types/user';
 
 @Injectable()
 export class AuthService {
@@ -28,7 +27,7 @@ export class AuthService {
       const token = await this.signToken(user.id, user.email)
 
       delete user.hash
-      return {user, token} as UserData
+      return token
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError) {
         if (e.code === 'P2002') {
@@ -54,7 +53,7 @@ export class AuthService {
       const token = await this.signToken(user.id, user.email)
 
       delete user.hash
-      return {user, token} as UserData
+      return token
     } catch (e) {
       throw e
     }

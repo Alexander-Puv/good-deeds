@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async editMe(userId: number, tag: string) {
+  async editTag(userId: number, tag: string) {
     const updatedTag = tag ? `@${tag}` : null
     const user = await this.prisma.user.update({
       where: {
@@ -20,10 +20,10 @@ export class UserService {
     return user
   }
 
-  async getUserByName(username: string) {
-    return this.prisma.user.findMany({
+  async getUserByTag(tag: string) {
+    return this.prisma.user.findUnique({
       where: {
-        username
+        tag
       }
     })
   }

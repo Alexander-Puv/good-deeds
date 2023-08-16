@@ -9,11 +9,6 @@ export default interface IUser {
   deeds?: IDeed[]
 }
 
-export interface UserData {
-  user: IUser,
-  token: string,
-}
-
 export interface UserCreationAttrs {
   email: string,
   username: string,

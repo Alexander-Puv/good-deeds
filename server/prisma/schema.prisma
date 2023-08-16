@@ -13,7 +13,7 @@ model User {
   email     String   @unique
   hash      String
   username  String
-  tag       String?
+  tag       String?  @unique
   deeds     Deed[]
 
   @@map("users")
