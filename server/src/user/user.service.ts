@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -7,6 +7,14 @@ export class UserService {
 
   async editTag(userId: number, tag: string) {
     const updatedTag = tag ? `@${tag}` : null
+  
+    const tagTaken = await this.prisma.user.findFirst({
+      where: {
+        tag: updatedTag
+      }
+    })
+    if (tagTaken) throw new ForbiddenException('Tag is taken')
+  
     const user = await this.prisma.user.update({
       where: {
         id: userId
@@ -15,16 +23,20 @@ export class UserService {
         tag: updatedTag
       }
     })
-
+  
     delete user.hash
     return user
   }
 
   async getUserByTag(tag: string) {
-    return this.prisma.user.findUnique({
+    const user = await this.prisma.user.findFirst({
       where: {
-        tag
+        tag: `@${tag}`
       }
     })
+    if (!user) throw new ForbiddenException('User was not found')
+
+    delete user.hash
+    return user
   }
 }

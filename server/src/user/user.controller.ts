@@ -19,7 +19,7 @@ export class UserController {
     return this.usersService.editTag(userId, tag)
   }
 
-  @Get(':tag')
+  @Get('find/:tag')
   getUserByTag(@Param('tag') tag: string) {
     return this.usersService.getUserByTag(tag)
   }
