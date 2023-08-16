@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async editMe(id: number, tag: string) {
+  async editMe(userId: number, tag: string) {
     const updatedTag = tag ? `@${tag}` : null
     const user = await this.prisma.user.update({
       where: {
-        id
+        id: userId
       },
       data: {
         tag: updatedTag

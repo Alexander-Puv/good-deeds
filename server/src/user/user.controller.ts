@@ -2,12 +2,12 @@ import { Body, Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/decorator';
 import IUser from 'src/types/user';
-import { UsersService } from './users.service';
+import { UserService } from './user.service';
 
 @UseGuards(AuthGuard('jwt'))
-@Controller('users')
-export class UsersController {
-  constructor(private usersService: UsersService) {}
+@Controller('user')
+export class UserController {
+  constructor(private usersService: UserService) {}
 
   @Get('me')
   getMe(@GetUser() user: IUser) {
@@ -15,8 +15,8 @@ export class UsersController {
   }
 
   @Put('me')
-  editMe(@GetUser('id') id: number, @Body() {tag}: {tag: string}) {
-    return this.usersService.editMe(id, tag)
+  editMe(@GetUser('id') userId: number, @Body() {tag}: {tag: string}) {
+    return this.usersService.editMe(userId, tag)
   }
 
   @Get(':username')
