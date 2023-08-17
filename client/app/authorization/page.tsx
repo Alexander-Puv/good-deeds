@@ -14,6 +14,7 @@ export default function Page() {
   const [password, setPassword] = useState('')
   const {login, signup} = useActions()
   const {me} = useTypedSelector(state => state.user)
+  const {authError} = useTypedSelector(state => state.auth)
 
   useEffect(() => {
     me && router.replace('/')
@@ -49,6 +50,10 @@ export default function Page() {
       <input className={cl.input} placeholder='Password' type='password'
         value={password} onChange={e => setPassword(e.currentTarget.value)}
         onKeyDown={enterHandler} />
+
+      {authError &&
+        <p>{authError}</p>
+      }
 
       <div className={cl.bottom}>
         <a className={cl.switch} onClick={() => setIsLoginPage(is => !is)}>
