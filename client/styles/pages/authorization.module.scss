@@ -20,7 +20,7 @@
     .switch {
       color: rgb(255 255 255 / 75%);
       cursor: pointer;
-      transition: .2s ease;
+      transition: $short-transition ease;
 
       &:hover {
         color: white;

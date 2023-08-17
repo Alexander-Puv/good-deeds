@@ -1,32 +1,18 @@
-export default interface IUser {
-  // id: number
-  // createdAt: Date,
-  email: string,
-  username: string,
-  tag?: string,
-}
-
-// reducer
-
 export interface AuthState {
-  user: IUser | null
+  token: string | null // to update user immediately
   isLoading: boolean
+  authError: string | null
 }
 
 export enum AuthActionTypes {
-  LOGIN = 'LOGIN',
-  SIGNUP = 'SIGNUP',
-  SET_ISLOADING = 'SET_ISLOADING'
+  AUTH = 'AUTH',
+  SET_ISLOADING = 'SET_ISLOADING',
+  SET_ERROR = 'AUTH_ERROR'
 }
 
-interface SetLoginAction {
-  type: AuthActionTypes.LOGIN
-  payload: IUser | null
-}
-
-interface SetSignupAction {
-  type: AuthActionTypes.SIGNUP
-  payload: IUser | null
+interface SetAuthAction { // login and signup
+  type: AuthActionTypes.AUTH
+  payload: string // token
 }
 
 interface SetIsLoadingAction {
@@ -34,4 +20,12 @@ interface SetIsLoadingAction {
   payload: boolean
 }
 
-export type AuthAction = SetLoginAction | SetSignupAction | SetIsLoadingAction
+interface SetErrorAction {
+  type: AuthActionTypes.SET_ERROR
+  payload: string
+}
+
+export type AuthAction =
+  | SetAuthAction
+  | SetIsLoadingAction
+  | SetErrorAction

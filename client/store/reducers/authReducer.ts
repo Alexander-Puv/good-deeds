@@ -1,26 +1,23 @@
 import { AuthAction, AuthActionTypes, AuthState } from "@/types/auth"
 
 const initialState: AuthState = {
-  user: typeof window !== 'undefined'
-    ? JSON.parse(localStorage.getItem('user-data') as string)
-    : null,
-  isLoading: true
+  token: typeof window !== 'undefined'
+  ? localStorage.getItem('token')
+  : null,
+  isLoading: true,
+  authError: null
 }
 
 const authReducer = (state = initialState, action: AuthAction): AuthState => {
   switch (action.type) {
-    case AuthActionTypes.LOGIN:
-      // some logic to add new user
-      localStorage.setItem('user-data', JSON.stringify(action.payload))
-      return {...state, user: action.payload}
-    
-    case AuthActionTypes.SIGNUP:
-      // some logic to add new user
-      localStorage.setItem('user-data', JSON.stringify(action.payload))
-      return {...state, user: action.payload}
+    case AuthActionTypes.AUTH:
+      return {...state, token: action.payload, authError: null}
 
     case AuthActionTypes.SET_ISLOADING:
       return {...state, isLoading: action.payload}
+
+    case AuthActionTypes.SET_ERROR:
+      return {...state, authError: action.payload}
 
     default:
       return state

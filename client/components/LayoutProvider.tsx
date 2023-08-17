@@ -24,18 +24,28 @@ const LayoutProvider = ({children}: LayoutProps) => {
 const LoaderLayout = ({children}: LayoutProps) => {
   const router = useRouter()
   const pathname = usePathname()
-  const {user, isLoading} = useTypedSelector(state => state.auth)
-  const {setIsLoading} = useActions()
+  const {token, isLoading} = useTypedSelector(state => state.auth)
+  const {me, userError} = useTypedSelector(state => state.user)
+  const {setIsLoading, setMe, setDeeds} = useActions()
 
   useEffect(() => {
-    if (!user && pathname !== '/authorization') {
+    if (!me && token) {
+      setMe(token)
+    }
+    if (!me
+      && (!token || userError)
+      && pathname !== '/authorization'
+    ) {
       router.replace('/authorization')
-    } else if (user && pathname === '/authorization') {
+    } else if (me && pathname === '/authorization') {
       router.replace('/')
     } else {
       setIsLoading(false)
     }
-  }, [user, pathname]);
+
+    me?.deeds && setDeeds(me.deeds)
+    console.log(me?.tag);
+  }, [me, token, pathname, userError]);
 
   if (isLoading) return <Loader />
   

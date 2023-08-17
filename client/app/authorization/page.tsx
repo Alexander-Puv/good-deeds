@@ -1,9 +1,10 @@
 'use client'
 
 import useActions from '@/hooks/useActions';
+import useTypedSelector from '@/hooks/useTypedSelector';
 import cl from '@/styles/pages/authorization.module.scss';
 import { useRouter } from 'next/navigation';
-import { KeyboardEvent, useState } from 'react';
+import { KeyboardEvent, useState, useEffect } from 'react';
 
 export default function Page() {
   const router = useRouter()
@@ -12,18 +13,21 @@ export default function Page() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const {login, signup} = useActions()
+  const {me} = useTypedSelector(state => state.user)
+
+  useEffect(() => {
+    me && router.replace('/')
+  }, [me])
 
   const handleLogin = () => {
     if (email && password) {
-      login(email)
-      router.replace('/')
+      login(email, password)
     }
   }
 
   const handleSignup = () => {
     if (email && username && password) {
-      signup(username, email)
-      router.replace('/')
+      signup(username, email, password)
     }
   }
 

@@ -1,10 +1,10 @@
 'use client'
 
 import Popup from '@/components/UI/Popup/Popup';
+import useActions from '@/hooks/useActions';
 import useTypedSelector from '@/hooks/useTypedSelector';
 import cl from '@/styles/components/TagPopup.module.scss';
-import IUser from '@/types/auth';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface TagPopupProps {
   popup: boolean,
@@ -12,13 +12,11 @@ interface TagPopupProps {
 }
 
 const TagPopup = ({popup, setPopup}: TagPopupProps) => {
-  const {user} = useTypedSelector(state => state.auth)
-  const [tag, setTag] = useState('')
+  const {editTag} = useActions()
+  const {token} = useTypedSelector(state => state.auth)
+  const {me} = useTypedSelector(state => state.user)
+  const [tag, setTag] = useState(me?.tag?.replace('@', '') || '')
   const [errors, setErrors] = useState<string[]>([])
-
-  useEffect(() => {
-    !user?.tag && setPopup(true)
-  }, [])
 
   const validateTag = (tag: string) => {
     const lengthPattern = /^.{5,25}$/
@@ -49,8 +47,7 @@ const TagPopup = ({popup, setPopup}: TagPopupProps) => {
   }
 
   const acceptClickHandler = () => {
-    const user: IUser = JSON.parse(localStorage.getItem('user-data') as string)
-    localStorage.setItem('user-data', JSON.stringify({...user, tag: `@${tag}`} as IUser))
+    token && editTag(token, tag) // token cannot be null
   }
 
   return (
@@ -68,7 +65,7 @@ const TagPopup = ({popup, setPopup}: TagPopupProps) => {
       </div>
       {errors.length ? <div className={cl.errors}>
         {errors.map(e =>
-          <div>{e}</div>
+          <div key={e}>{e}</div>
         )}
       </div> : ''}
       <span className='divider' />
